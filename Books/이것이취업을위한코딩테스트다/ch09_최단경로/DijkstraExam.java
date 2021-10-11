@@ -19,35 +19,28 @@ import java.util.stream.IntStream;
  */
 
 class Node {
-
     private int index;
     private int distance;
-
     public Node(int index, int distance) {
         this.index = index;
         this.distance = distance;
     }
-
     public int getIndex() {
         return this.index;
     }
-
     public int getDistance() {
         return this.distance;
     }
 }
 
 public class DijkstraExam {
-
         private static int n;
         static int start;
         static ArrayList<ArrayList<Node>> graph;
         static boolean[] visited;
         static int[] distance;
-
     public static void main(String[] arsgs){
         Scanner scanner = new Scanner(System.in);
-
         //노드의 개수, 간선의 개수 입력
         n = scanner.nextInt();
         int m = scanner.nextInt();
@@ -119,9 +112,7 @@ public class DijkstraExam {
                 // 현재 노드를 거쳐서 다른 노드를 이동하는 거리가 더 짧은 경우
                 if(cost < distance[graph.get(now).get(j).getIndex()])
                     distance[graph.get(now).get(j).getIndex()] = cost;
-
             }
         }
-
     }
 }
