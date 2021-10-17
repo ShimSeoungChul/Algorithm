@@ -5,6 +5,7 @@ import java.util.Scanner;
 import java.util.stream.IntStream;
 
 /*
+입력값
 6 11
 1
 1 2 2
@@ -88,7 +89,7 @@ public class EnhancedDijkstraExam {
             int a = sc.nextInt();
             int b = sc.nextInt();
             int c = sc.nextInt();
-            graph.get(a).add(new Node_(b,c)); //a번 노드에서 b번 노드로 가는 비용이 c임
+            graph.get(a).add(new Node_(b,c)); //a번 노드에 서 b번 노드로 가는 비용이 c임
         });
 
         //최단 거리 테이블을 모두 무한으로 초기화
