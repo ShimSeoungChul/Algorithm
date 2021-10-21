@@ -7,6 +7,7 @@
       <sourceFolder url="file://$MODULE_DIR$/이것이취업을위한코딩테스트다/ch07_이진탐색" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/이것이취업을위한코딩테스트다/ch08_다이나믹프로그래밍" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/이것이취업을위한코딩테스트다/ch09_최단경로" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/이것이취업을위한코딩테스트다/ch10_그래프" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/이것이취업을위한코딩테스트다/ch13_DFSBFS" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
