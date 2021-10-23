@@ -43,9 +43,10 @@ public class 서로소집합알고리즘 {
 
     //특정 원소가 속한 집합 찾기
     private int findParent(int[] parent, int x){
-        //루트 노드가 아니라면, 루트 노드를 찾을 떄까지 재귀적으로 호출
-        if(parent[x] != x) return findParent(parent, parent[x]);
-        return x;
+        // 루트 노드가 아니라면, 루트 노드를 찾을 때까지 재귀적으로 호출
+        if(parent[x] != x)
+            parent[x] = findParent(parent, parent[x]);
+        return parent[x];
     }
 
     //두 원소가 속한 집합 합치기
