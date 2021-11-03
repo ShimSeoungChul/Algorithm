@@ -56,7 +56,6 @@ public class TopologicalSortingExam {
         for(int i = 0; i < result.size(); i++){
             System.out.print(result.get(i) + " ");
         }
-
     }
 
     public static void main(String[] args) {
