@@ -46,7 +46,7 @@ public class 부품찾기 {
                 end = mid - 1;
             }
         }
-        
+
         return "no";
     }
 }

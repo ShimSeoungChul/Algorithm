@@ -1,37 +1,37 @@
 
 import java.util.*;
 import java.util.List;
+import java.util.stream.IntStream;
 
 /*
 4 6
 19 15 10 17
  */
-public class Hard_떡볶이떡만들기 {
+public class 떡볶이떡만들기 {
     public static void main(String[] args){
         Scanner scanner = new Scanner(System.in);
         int N,M; //떡의 개수, 요청한 떡의 길이
         N = scanner.nextInt();
         M = scanner.nextInt();
 
-        List<Integer> lengthList = new ArrayList<>(); // 떡들의 길이
-        for(int i=0; i <N ; i++) {
-            Integer num = scanner.nextInt();
-            lengthList.add(num);
-        }
+        // 떡 길이 입력
+        int[] lengthArr = IntStream.range(0,N)
+            .map(i -> scanner.nextInt())
+            .sorted() // 이진 탐색 사용을 위해 정렬
+            .toArray();
 
-        lengthList.sort(Comparator.naturalOrder());
-        int end = lengthList.get(lengthList.size()-1);
         int start = 0;
-        binarySearch(start,end,M,lengthList);
+        int end = lengthArr[lengthArr.length-1];
+        binarySearch(start,end,M,lengthArr);
     }
 
-    static void binarySearch(int start , int end, int target, List<Integer> lengthList){
+    static void binarySearch(int start , int end, int target, int[] lengthArr){
         while(start <= end){
             int mid = (start+end)/2; // 절단기 길이 구하기
             // 자르고 남은 떡의 길이
-            int remainder = lengthList.stream()
+            int remainder = Arrays.stream(lengthArr)
                     .filter(length -> length>mid) //절단기 보다 짧은 떡을 제거하고,
-                    .mapToInt(x->x%mid) //절단기로 자른 떡들의 길이를 매핑하여,
+                    .map(x->x%mid) //절단기로 자른 떡들의 길이를 매핑하여,
                     .sum(); //더한다.
 
             if(remainder == target) {
