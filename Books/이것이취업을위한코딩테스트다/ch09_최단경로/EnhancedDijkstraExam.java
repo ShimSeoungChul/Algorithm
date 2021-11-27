@@ -20,89 +20,105 @@ import java.util.stream.IntStream;
 5 3 1
 5 6 2
  */
-class Node_ implements Comparable<Node_> {
-    private int index;
-    private int distance;
 
-    Node_(int index, int distance){
-        this.index = index;
-        this.distance = distance;
-    }
-    public int getDistance() {
-        return distance;
-    }
-    public int getIndex() {
-        return index;
-    }
-
-    // 거리(비용)가 짧은 것이 높은 우선순위를 가지정록 설정
-    @Override
-    public int compareTo(Node_ o) {
-       return o.distance - this.distance;
-    }
-}
 
 public class EnhancedDijkstraExam {
+    public static ArrayList<ArrayList<Node>> graph = new ArrayList<>();
+    public static int start;
+    public static int[] distance;
 
-    public static final int INF = Integer.MAX_VALUE; // 무한을 의미하는 값 설정
-    // 노드의 개수(n), 간선의 개수(m), 시작 노드 번호(start)
-    public static int n,m,start;
-    // 각 노드에 연결되어 있는 노드에 대한 정보를 담는 배열
-    public static ArrayList<ArrayList<Node_>> graph = new ArrayList<>();
-    // 최단 거리 테이블
-    public static int[] d = new int[100001];
+    public static void main(String[] args) {
+        // 노드의 개수 n, 간선의 개수 m, 시작 노드 start 입력
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        start = sc.nextInt();
 
-    private void dijkstra(int start){
-        PriorityQueue<Node_> pq = new PriorityQueue<>();
-        pq.offer(new Node_(start,0));
-        d[start] = 0;
-        while (!pq.isEmpty()){ // 큐가 비어있지 않다면
-            // 가장 최단 거리가 짧은 노드에 대한 정보 꺼내기
-            Node_ node_ = pq.poll();
-            int dist = node_.getDistance(); //현재 노드까지의 비용
-            int now = node_.getIndex(); //현재 노드
-            //현재 노드가 이미 처리된 적이 있는 노드라면 무시
-            if(d[now]<dist) continue;;
-            //현재 노드와 연결된 다른 인접한 노드들을 확인
-            for(int i=0;i<graph.get(now).size(); i++){
-                Node_ otherNode = graph.get(now).get(i);
-                int cost = d[now] + otherNode.getDistance();
-                //현재 노드를 거쳐서 다른 노드로 이동하는 거리가 더 짧은 경우
-                if(cost<d[otherNode.getIndex()]){
-                    d[otherNode.getIndex()] = cost;
-                    pq.offer(new Node_(otherNode.getIndex(),cost));
-                }
+        // 노드 간의 연결 관계를 그래프에 저장
+        for (int i = 0; i <= n; i++) {
+            graph.add(new ArrayList<>());
+        }
+
+        for (int i = 0; i < m; i++) {
+            // 노드 a와 b의 거리는 d
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+            int d = sc.nextInt();
+            graph.get(a).add(new Node(b, d));
+        }
+
+        // 최단 거리를 저장하는 테이블 생성후 가장 큰 수로 초기화
+        distance = new int[n + 1];
+        Arrays.fill(distance, Integer.MAX_VALUE);
+
+        // 다이직스트라 알고리즘 수행
+        dijkstra();
+
+        // 모든 노드로 가기 위한 최단 경로 출력
+        for (int d : distance) {
+            if (d == Integer.MAX_VALUE) {
+                System.out.println("INFINITY");
+            } else {
+                System.out.println(d);
             }
         }
     }
 
-    public static void main(String[] args){
-        Scanner sc = new Scanner(System.in);
-        n = sc.nextInt();
-        m = sc.nextInt();
-        start = sc.nextInt();
+    public static void dijkstra() {
+        // 연결된 노드 정보를 저장하는 우선순위 큐
+        PriorityQueue<Node> pq = new PriorityQueue<>();
+        // 시작 노드 초기화
+        pq.offer(new Node(start, 0));
+        distance[start] = 0;
 
-        // 그래프 초기화
-        IntStream.rangeClosed(0,n).forEach(i-> graph.add(new ArrayList<Node_>()));
-        //모든 간선 정보 입력
-        IntStream.range(0,m).forEach(i->{
-            int a = sc.nextInt();
-            int b = sc.nextInt();
-            int c = sc.nextInt();
-            graph.get(a).add(new Node_(b,c)); //a번 노드에 서 b번 노드로 가는 비용이 c임
-        });
+        while (!pq.isEmpty()) { // 큐에 원소가 존재하면,
+            // 큐 맨 위에 존재하는 거리가 가장 짧은 노드를 선택
+            Node node = pq.poll();
+            int i = node.getIndex();
+            int d = node.getDistance();
 
-        //최단 거리 테이블을 모두 무한으로 초기화
-        Arrays.fill(d,INF);
+            // 꺼낸 노드를 이미 처리한 적이 있다면 무시
+            if (distance[i] < d) {
+                continue;
+            }
 
-        //다익스트라 알고리즘 수행
-        EnhancedDijkstraExam dijkstraExam = new EnhancedDijkstraExam();
-        dijkstraExam.dijkstra(start);
+            // 현재 노드와 연결된 노드 확인
+            ArrayList<Node> linkedNodes = graph.get(i);
+            for (Node linkedNode : linkedNodes) {
+                // 현재 노드까지의 거리와 연결된 노드의 거리를 합치고,
+                int sum = d + linkedNode.getDistance();
 
-        //모든 노드로 가기 위한 최단 거리를 출력
-        IntStream.rangeClosed(1,n).forEach(i->{
-            if(d[i] == INF) System.out.println("INFINITY"); //도달할 수 없는 경우, 무한(INFINITY)라고 출력
-            else System.out.println(d[i]);  //도달할 수  있는 경우 거리를 출력
-        });
+                // 기존의 최단 거리와 비교하여, 더 작다면 값을 갱신한다.
+                // 그리고 더 짧은 경로를 찾은 노드 정보들은 다시 우선순위 큐에 넣는다.
+                if (sum < distance[linkedNode.getIndex()]) {
+                    distance[linkedNode.getIndex()] = sum;
+                    pq.offer(linkedNode);
+                }
+            }
+        }
+
+    }
+
+    static class Node implements Comparable<Node> {
+        private int index;
+        private int distance;
+
+        Node(int index, int distance) {
+            this.index = index;
+            this.distance = distance;
+        }
+
+        public int getIndex() {
+            return index;
+        }
+
+        public int getDistance() {
+            return distance;
+        }
+
+        @Override
+        public int compareTo(Node other) {
+            return this.getDistance() - other.getDistance();
+        }
     }
 }

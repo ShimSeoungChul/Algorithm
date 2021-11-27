@@ -17,23 +17,6 @@ import java.util.stream.IntStream;
 5 3 1
 5 6 2
  */
-class Node {
-    private int index;
-    private int distance;
-
-    public Node(int index, int distance) {
-        this.index = index;
-        this.distance = distance;
-    }
-
-    public int getIndex() {
-        return this.index;
-    }
-
-    public int getDistance() {
-        return this.distance;
-    }
-}
 
 public class DijkstraExam {
     static int[] distance;
@@ -122,5 +105,23 @@ public class DijkstraExam {
             }
         }
         return index;
+    }
+
+    static class Node {
+        private int index;
+        private int distance;
+
+        public Node(int index, int distance) {
+            this.index = index;
+            this.distance = distance;
+        }
+
+        public int getIndex() {
+            return this.index;
+        }
+
+        public int getDistance() {
+            return this.distance;
+        }
     }
 }
