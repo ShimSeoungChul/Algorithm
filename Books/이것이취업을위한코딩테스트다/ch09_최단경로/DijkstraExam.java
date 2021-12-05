@@ -26,6 +26,7 @@ public class DijkstraExam {
     static int n; // 노드의 개수
 
     public static void main(String[] args) {
+
         Scanner sc = new Scanner(System.in);
         // 노드 n, 간선 m 개수 입력
         n = sc.nextInt();
