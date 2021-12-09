@@ -1,7 +1,7 @@
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class BFS {
+public class BfsExam {
 	public static void main(String[] args){
 		//각 노드가 연결된 정보를 2차원 배열 자료형으로 표현
 		int [][]graph = {{},

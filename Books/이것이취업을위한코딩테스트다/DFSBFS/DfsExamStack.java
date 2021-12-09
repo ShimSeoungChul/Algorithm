@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class DFS_Stack {
+public class DfsExamStack {
     public static void main(String[] args){
 
         //각 노드가 연결된 정보를 2차원 배열 자료형으로 표현
@@ -18,7 +18,7 @@ public class DFS_Stack {
         boolean [] visited = {false, false, false ,false ,false ,false ,false ,false, false};
 
         //정의된 DFS 함수 호출
-        DFS_Stack dfsExam = new DFS_Stack();
+        DfsExamStack dfsExam = new DfsExamStack();
         dfsExam.dfs(graph, 1, visited);
     }
 

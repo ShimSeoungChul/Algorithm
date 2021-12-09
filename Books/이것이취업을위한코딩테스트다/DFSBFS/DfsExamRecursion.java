@@ -1,4 +1,4 @@
-public class DFS_재귀 {
+public class DfsExamRecursion {
     //각 노드가 방문된 정보를 1차원 배열 자료형으로 표현
     public static boolean [] visited = {false, false, false ,false ,false ,false ,false ,false, false};
     // 각 노드가 연결된 정보를 2차원 배열 자료형으로 표현
