@@ -34,7 +34,7 @@ import java.util.Scanner;
 2
 3
  */
-public class 특정거리의도시찾기 {
+public class 특정거리의도시찾기DFS {
 
 	static boolean[] visited;
 	static int[] distance;
