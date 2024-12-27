@@ -1,0 +1,72 @@
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+@RestController
+@RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+class HealthcheckController {
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	static class ResponseDto {
+		String currentTime;
+		String status;
+
+		public ResponseDto(String status) {
+			this.status = status;
+		}
+
+		public ResponseDto(String status, String currentTIme) {
+			this.status = status;
+			this.currentTime = currentTIme;
+		}
+
+		public String getCurrentTime() {
+			return currentTime;
+		}
+
+		public String getStatus() {
+			return status;
+		}
+
+		public void getCurrentTime(String currentTIme) {
+			this.currentTime = currentTIme;
+		}
+
+		public void setStatus(String status) {
+			this.status = status;
+		}
+	}
+
+	@GetMapping(value = "/healthcheck")
+	public ResponseEntity healthcheck(@RequestParam("format") String foramt) {
+		if (foramt.equals("short")) {
+			return new ResponseEntity<>(new ResponseDto("OK"), HttpStatus.OK);
+		} else if (foramt.equals("full")) {
+			return new ResponseEntity<>(new ResponseDto("OK", ZonedDateTime.now(ZoneOffset.UTC).toString()),
+				HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	@PutMapping(value = "/healthcheck")
+	public ResponseEntity healthcheckPut() {
+		return new ResponseEntity<>(HttpStatus.METHOD_NOT_ALLOWED);
+	}
+
+	@PostMapping(value = "/healthcheck")
+	public ResponseEntity healthcheckPost() {
+		return new ResponseEntity<>(HttpStatus.METHOD_NOT_ALLOWED);
+	}
+
+	@DeleteMapping(value = "/healthcheck")
+	public ResponseEntity healthcheckDelete() {
+		return new ResponseEntity<>(HttpStatus.METHOD_NOT_ALLOWED);
+	}
+}

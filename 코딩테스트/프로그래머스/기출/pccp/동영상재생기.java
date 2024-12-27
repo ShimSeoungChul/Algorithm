@@ -1,4 +1,4 @@
-package 프로그래머스.pccp;
+package 프로그래머스.기출.pccp;
 
 // https://school.programmers.co.kr/learn/courses/30/lessons/340213?language=java
 
