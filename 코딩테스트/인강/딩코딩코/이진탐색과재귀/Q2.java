@@ -1,4 +1,4 @@
-package 인강.딩코딩코.재귀;
+package 인강.딩코딩코.이진탐색과재귀;
 
 import java.util.List;
 import java.util.Arrays;
