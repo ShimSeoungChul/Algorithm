@@ -5,7 +5,7 @@ import java.util.List;
 
 // 더하거나 뺴거나
 // https://fern-freeze-290.notion.site/2-aa9f6967b8604d3d9d609d0cc9ce0c9e#04fe52d2fc104b80b3c37c6c02e5888d
-public class Q3 {
+public class Q3TODO {
     public static void main(String[] args) {
         System.out.println(getCountOfWaysToTargetByDoingPlusOrMinus(new int[] {1, 1, 1, 1, 1}, 3)); // 5
         System.out.println(getCountOfWaysToTargetByDoingPlusOrMinus2(new int[] {1, 1, 1, 1, 1}, 3)); // 5
