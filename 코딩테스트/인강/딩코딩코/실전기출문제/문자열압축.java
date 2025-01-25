@@ -17,7 +17,6 @@ public class 문자열압축 {
         System.out.println("정답 = 17 / 현재 풀이 값 = " + stringCompression("xababcdcdababcdcd"));
     }
 
-    // 내 풀이
     public static int stringCompression(String string) {
 
         int result = Integer.MAX_VALUE;
